@@ -1,0 +1,171 @@
+# Lab Setup Guide (Linux) – Docker, Minikube, Terraform, Git, Kubernetes
+
+## Objective
+This guide installs all required tools on a fresh Linux system to run Docker, Kubernetes (Minikube), Terraform, Git, and related lab tasks.
+
+---
+
+## STEP 1: Update System
+
+sudo apt update
+sudo apt upgrade -y
+
+---
+
+## STEP 2: Install Git
+
+sudo apt install -y git
+
+# verify
+git --version
+
+---
+
+## STEP 3: Install Docker
+
+sudo apt install -y docker.io
+
+# start docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# add user to docker group (avoid sudo)
+sudo usermod -aG docker $USER
+
+# apply changes
+newgrp docker
+
+# verify
+docker --version
+
+---
+
+## STEP 4: Install kubectl (Kubernetes CLI)
+
+sudo apt install -y kubectl
+
+# verify
+kubectl version --client
+
+---
+
+## STEP 5: Install Minikube
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# verify
+minikube version
+
+---
+
+## STEP 6: Start Minikube
+
+minikube start --driver=docker
+
+# verify
+minikube status
+kubectl cluster-info
+
+---
+
+## STEP 7: Use Minikube Docker
+
+eval $(minikube docker-env)
+
+---
+
+## STEP 8: Install Terraform
+
+sudo apt install -y wget unzip
+
+wget https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+
+unzip terraform_1.5.0_linux_amd64.zip
+
+sudo mv terraform /usr/local/bin/
+
+# verify
+terraform -version
+
+---
+
+## STEP 9: Install Helm (for Prometheus)
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# verify
+helm version
+
+---
+
+## STEP 10: Install OpenFaaS CLI (arkade)
+
+curl -sLS https://get.arkade.dev | sudo sh
+
+# verify
+arkade version
+
+---
+
+## STEP 11: Install faas-cli
+
+curl -sSL https://cli.openfaas.com | sudo sh
+
+# verify
+faas-cli version
+
+---
+
+## STEP 12: Install MongoDB
+
+sudo apt install -y mongodb
+
+# start mongodb
+sudo systemctl start mongodb
+
+# open shell
+mongosh
+
+---
+
+## STEP 13: Clone Lab Repository
+
+git clone https://github.com/Raghavsharma10/cicd.git
+
+cd cicd
+
+---
+
+## STEP 14: Navigate to Any Lab
+
+cd l5-minikube
+ls
+cat flow.md
+
+---
+
+## IMPORTANT NOTES
+
+- Always run: eval $(minikube docker-env)
+- Keep terminal open when using: minikube service
+- Ports change every run (check output)
+- Use: kubectl get pods (to debug)
+- Use: docker images (to verify builds)
+
+---
+
+## QUICK CHECK
+
+docker --version
+kubectl version --client
+minikube version
+terraform -version
+git --version
+
+---
+
+## CONCLUSION
+
+All required tools are installed and system is ready to run Docker, Kubernetes, Terraform, OpenFaaS, and CI/CD labs.
