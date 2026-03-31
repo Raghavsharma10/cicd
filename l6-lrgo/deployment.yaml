@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: lr-app
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: lr-app
+
+  template:
+    metadata:
+      labels:
+        app: lr-app
+
+    spec:
+      containers:
+        - name: lr-container
+          image: lr-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000

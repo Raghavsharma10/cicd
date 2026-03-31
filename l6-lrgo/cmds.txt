@@ -1,0 +1,28 @@
+# start minikube
+minikube start --driver=docker
+
+# use minikube docker
+eval $(minikube docker-env)
+
+# build image
+docker build -t lr-service .
+
+# deploy
+kubectl apply -f deployment.yaml
+
+# (optional service yaml)
+kubectl apply -f service.yaml
+
+# OR expose via command
+kubectl expose deployment lr-app --type=NodePort --port=3000
+
+# verify
+kubectl get pods
+kubectl get services
+
+# describe (IMPORTANT for exam)
+kubectl describe deployment lr-app
+kubectl describe service lr-service
+
+# run service (keep open)
+minikube service lr-service
