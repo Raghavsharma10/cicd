@@ -26,9 +26,12 @@ TASK 2: MongoDB (Local)
 ------------------------
 
 # start mongodb
+mkdir -p ~/mongodb-data
+ls ~/mongodb-data
+mongod --dbpath ~/mongodb-data
 mongod
 
-# open shell
+# open shell ( in different tab)
 mongosh
 
 # create database
