@@ -169,3 +169,7 @@ git --version
 ## CONCLUSION
 
 All required tools are installed and system is ready to run Docker, Kubernetes, Terraform, OpenFaaS, and CI/CD labs.
+
+## opencode download
+npm install -g opencode-ai
+opencode
