@@ -173,3 +173,9 @@ All required tools are installed and system is ready to run Docker, Kubernetes, 
 ## opencode download
 npm install -g opencode-ai
 opencode
+
+## if .config issue arises - 
+sudo chown -R $(whoami) ~/.config
+chmod -R u+rwx ~/.config
+mkdir -p ~/.config/opencode
+opencode
