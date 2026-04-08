@@ -1,0 +1,43 @@
+VMware vSphere Automation - PowerCLI (HOL-2530-04-VCF-L)
+VMware vSphere Automation - PowerCLI (HOL-2530-04-VCF-L)
+if get command not working
+Import-Module VMware.PowerCLI
+Get-VICommand
+
+dadasdasdx
+Disable proxy in PowerShell...
+netsh winhttp reset proxy
+
+Set PowerCLI to ignore proxy...
+Set-PowerCLIConfiguration -ProxyPolicy NoProxy -Confirm:$false
+
+Ignore certificate...
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Scope Session -Confirm:$false
+
+Now connect
+Connect-VIServer vcsa-01a -User administrator@vsphere.local -Password VMware123!
+
+for cloning...just after connecting
+
+use
+
+GET-VMHost
+
+Clone VM...
+Get-VM core-A | New-VM -Name "rupsika" -VMHost esx-01a.vcf.sddc.lab
+
+Start cloned VM..
+Start-VM rupsika
+
+Verify...
+Get-VM rupsika
+
+
+
+
+
+
+
+
+
+
